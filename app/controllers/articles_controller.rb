@@ -14,7 +14,6 @@ class ArticlesController < ApplicationController
   def create
     # @article = Article.new(title: "Amazing Animals", body: "Show of top 10 Animals"title: "Amazing Animals", body: "Show of top 10 Animals")
     @article = Article.new(article_params)
-    
     if @article.save
       redirect_to @article
     else
@@ -22,7 +21,22 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render :edit
+    end
+  end
+
   private
+
   def article_params
     params.require(:article).permit(:title, :body)
   end
