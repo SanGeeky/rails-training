@@ -8,12 +8,11 @@ articles and counting!
     <% unless article.archived? %>
     <li>
     <%# <a href="/articles/<%=article.id %>
-    <%# <a href="<%= article_path(article) %>"> %>
-      <%# <%= article.title %>     %>
+    <%# <a href="<%= article_path(article) %>
+      <%# <%= article.title %> 
     <%# </a> %>
 
     <%# Link Text, Link Destitation %>
-      <br>
       <%= link_to article.title, article%>
     </li>
     <% end %>
