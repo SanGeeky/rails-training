@@ -1,8 +1,8 @@
 const { environment } = require('@rails/webpacker')
 
-console.log(environment.output_path)
-console.log(environment.source_path)
-console.log(environment.toWebpackConfig())
+// console.log(environment.output_path)
+// console.log(environment.source_path)
+// console.log(environment.toWebpackConfig())
 
 const customConfig = {
   resolve: {
