@@ -26,4 +26,6 @@ test:
 production:
   <<: *default
   # database: db/production.sqlite3
-  database: railsblog
+  database: dbbgov5vn124re
+  url: <%= ENV['DATABASE_URL'] %>
+
