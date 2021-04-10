@@ -1,13 +1,14 @@
 class ArticlesController < ApplicationController
-  
-  http_basic_authenticate_with name: "user", password: "secret", except: [:index, :show]
+  before_action :find_article, except: %i[index new create]
+
+  http_basic_authenticate_with name: 'user', password: 'secret', except: %i[index show]
 
   def index
     @articles = Article.all
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article 
   end
 
   def new
@@ -15,22 +16,21 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    # @article = Article.new(title: "Amazing Animals", body: "Show of top 10 Animals"title: "Amazing Animals", body: "Show of top 10 Animals")
     @article = Article.new(article_params)
-    if @article.save
-      redirect_to(article_path(@article))
-    else
+    begin
+      @article.save!
+    rescue StandardError => e
       render :new
+    else
+      redirect_to(article_path(@article))
     end
   end
 
   def edit
-    @article = Article.find(params[:id])
+    @article
   end
 
   def update
-    @article = Article.find(params[:id])
-
     if @article.update(article_params)
       redirect_to @article
     else
@@ -39,7 +39,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
 
     redirect_to root_path
@@ -49,5 +48,13 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body, :status)
+  end
+
+  def find_article
+    begin
+      @article = Article.find(params[:id])
+    rescue => exception
+      not_found
+    end
   end
 end
