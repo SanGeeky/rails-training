@@ -3,15 +3,15 @@
 <p><%= @article.body %></p>
 
 <ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li><%= link_to 'Edit', edit_article_path(@article) %></li>
   <li>
-    <%= link_to "Destroy", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
   </li>
 </ul>
 
 <h2>Comments</h2>
 <% @article.comments.each do |comment| %>
-  <%= render @article.comments %>
+  <%= render comment %>
 <% end %>
 
 <h2>Add a comment:</h2>

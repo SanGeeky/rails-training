@@ -1,4 +1,3 @@
-<%# Article Now is a Local Variable %>
 <%= form_with model: article do |form| %>
   <div>
     <%= form.label :title %><br>
@@ -18,7 +17,7 @@
 
   <div>
     <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    <%= form.select :status, %w[public private archived], selected: 'public' %>
   </div>
 
   <div>
