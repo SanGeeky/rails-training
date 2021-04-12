@@ -1,15 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :find_article, except: %i[index new create]
-
   http_basic_authenticate_with name: 'user', password: 'secret', except: %i[index show]
 
   def index
     @articles = Article.all
   end
 
-  def show
-    @article 
-  end
+  def show; end
 
   def new
     @article = Article.new
@@ -19,28 +16,30 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     begin
       @article.save!
-    rescue StandardError => e
+    rescue ActiveRecord::RecordInvalid
+      puts e.message
       render :new
-    else
-      redirect_to(article_path(@article))
     end
+    redirect_to @article
   end
 
-  def edit
-    @article
-  end
+  def edit; end
 
   def update
-    if @article.update(article_params)
-      redirect_to @article
-    else
+    begin
+      @article.update!(article_params)
+    rescue ActiveRecord::RecordInvalid
       render :edit
     end
+    redirect_to @article
   end
 
   def destroy
-    @article.destroy
-
+    begin
+      @article.destroy!
+    rescue ActiveRecord::RecordNotDestroyed
+      redirect_back fallback_location: root_path
+    end
     redirect_to root_path
   end
 
@@ -51,10 +50,8 @@ class ArticlesController < ApplicationController
   end
 
   def find_article
-    begin
-      @article = Article.find(params[:id])
-    rescue => exception
-      not_found
-    end
+    @article = Article.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 end
