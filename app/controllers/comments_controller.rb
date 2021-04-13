@@ -4,28 +4,36 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comments_params)
-    @comment.article_id = params[:article_id]
     begin
       @comment.save!
+      redirect_article
     rescue ActiveRecord::RecordInvalid
+      redirect_article
     end
-    redirect_back fallback_location: articles_url
   end
 
   def destroy
-    @comment.destroy if @comment.article_id.eql? params[:article_id].to_i
-    redirect_back fallback_location: articles_url
+    @comment.destroy!
+    redirect_article
+  rescue ActiveRecord::RecordNotDestroyed
+    redirect_article
   end
 
   private
 
   def comments_params
-    params.require(:comment).permit(:commenter, :body, :status, :article_id)
+    comment = params.require(:comment).permit(:commenter, :body, :status).to_h
+    comment['article_id'] = params['article_id']
+    comment
   end
 
   def find_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by(id: params[:id], article_id: params[:article_id])
   rescue ActiveRecord::RecordNotFound
     not_found
+  end
+
+  def redirect_article
+    redirect_back fallback_location: articles_url
   end
 end

@@ -16,31 +16,26 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     begin
       @article.save!
+      redirect_to @article
     rescue ActiveRecord::RecordInvalid
-      puts e.message
       render :new
     end
-    redirect_to @article
   end
 
   def edit; end
 
   def update
-    begin
-      @article.update!(article_params)
-    rescue ActiveRecord::RecordInvalid
-      render :edit
-    end
+    @article.update!(article_params)
     redirect_to @article
+  rescue ActiveRecord::RecordInvalid
+    render :edit
   end
 
   def destroy
-    begin
-      @article.destroy!
-    rescue ActiveRecord::RecordNotDestroyed
-      redirect_back fallback_location: root_path
-    end
+    @article.destroy!
     redirect_to root_path
+  rescue ActiveRecord::RecordNotDestroyed
+    redirect_back fallback_location: root_path
   end
 
   private
