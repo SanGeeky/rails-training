@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
   def find_comment
     @comment = Comment.find_by(id: params[:id], article_id: params[:article_id])
-    @comment.nil? ? not_found : @comment
+    not_found if @comment.nil?
   end
 
   def redirect_article
