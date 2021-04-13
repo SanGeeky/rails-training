@@ -10,6 +10,24 @@ Ruby on Rails Getting Started.
 
 `rails new blog`
 
-### Run Server
+# Develop on Existing Project
+
+### Install Javascript Dependencies
+
+`yarn install`
+
+### Install Gems and Rails Dependencies
+
+`bundle install`
+
+### Make migrations
+
+`rails db:migrate`
+
+### Run Server and play with Rails!
 
 `rails server`
+
+----------------------------
+*SOURCE: *
+[Development Installation](https://guides.rubyonrails.org/development_dependencies_install.html)
