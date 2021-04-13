@@ -4,18 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    begin
-      @comment.save!
-      redirect_article
-    rescue ActiveRecord::RecordInvalid
-      redirect_article
-    end
+    @comment.save
+    redirect_article
   end
 
   def destroy
-    @comment.destroy!
-    redirect_article
-  rescue ActiveRecord::RecordNotDestroyed
+    @comment.destroy
     redirect_article
   end
 
@@ -23,16 +17,15 @@ class CommentsController < ApplicationController
 
   def comment_params
     comment = params.require(:comment).permit(:commenter, :body, :status)
-    comment.merge(article_id: params['article_id'])
+    comment.merge(article_id: params[:article_id])
   end
 
   def find_comment
     @comment = Comment.find_by(id: params[:id], article_id: params[:article_id])
-  rescue ActiveRecord::RecordNotFound
-    not_found
+    @comment.nil? ? not_found : @comment
   end
 
   def redirect_article
-    redirect_back fallback_location: articles_url
+    redirect_back(fallback_location: articles_url)
   end
 end

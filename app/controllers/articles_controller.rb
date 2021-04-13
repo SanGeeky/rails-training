@@ -6,36 +6,22 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
-  def show; end
-
   def new
     @article = Article.new
   end
 
   def create
     @article = Article.new(article_params)
-    begin
-      @article.save!
-      redirect_to @article
-    rescue ActiveRecord::RecordInvalid
-      render :new
-    end
+    @article.save ? redirect_to(@article) : render(:new)
   end
 
-  def edit; end
-
   def update
-    @article.update!(article_params)
-    redirect_to @article
-  rescue ActiveRecord::RecordInvalid
-    render :edit
+    @article.update(article_params) ? redirect_to(@article) : render(:edit)
   end
 
   def destroy
-    @article.destroy!
-    redirect_to root_path
-  rescue ActiveRecord::RecordNotDestroyed
-    redirect_back fallback_location: root_path
+    @article.destroy
+    redirect_to(root_path)
   end
 
   private
