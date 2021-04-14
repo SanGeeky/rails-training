@@ -29,5 +29,5 @@ Ruby on Rails Getting Started.
 `rails server`
 
 ----------------------------
-*SOURCE: *
+**SOURCE:**
 [Development Installation](https://guides.rubyonrails.org/development_dependencies_install.html)
