@@ -91,6 +91,12 @@ In the project directory type:
 ```
 heroku create
 ```
+**Add Build Pack for Ruby**
+This help us to install Ruby Dependencies and Gems
+```
+heroku buildpacks:set heroku/ruby
+```
+
 Then we need to push local repository to Heroku:
 ```
 git push heroku main
@@ -109,8 +115,13 @@ heroku run rake db:migrate
 ### Create Heroku Procfile
 In root path of project we need to add a `Procfile` and write:
 ```
-web: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
+web: bundle exec puma -C config/puma.rb
 ```
+or
+```
+web: rails server
+```
+
 This file works with `puma.rb` file, for maximun performance visit [Heroku Puma documentation](https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#adding-puma-to-your-application)
 
 ### Run Heroku locally
@@ -133,6 +144,14 @@ If we need to push changes from another branch use:
 ```
 git push heroku branch_name:main
 ```
+
+### Additional Settings
+Maybe Yarn packages will fail in deploy, so i recomend use the next Config var:
+```
+heroku config:set YARN_PRODUCTION=false
+```
+This will access to `devDependencies` in our `package.json`
+[Skip Pruning](https://devcenter.heroku.com/articles/nodejs-support#skip-pruning)
 
 ### Visit your App
 In my case the app was deployed in the next URL:
