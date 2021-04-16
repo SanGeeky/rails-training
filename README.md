@@ -145,11 +145,6 @@ If we need to push changes from another branch use:
 git push heroku branch_name:main
 ```
 
-### Additional Settings
-Maybe Yarn packages will fail in deploy, so i recomend use the next Config var:
-```
-heroku config:set YARN_PRODUCTION=false
-```
 This will access to `devDependencies` in our `package.json`
 [Skip Pruning](https://devcenter.heroku.com/articles/nodejs-support#skip-pruning)
 
