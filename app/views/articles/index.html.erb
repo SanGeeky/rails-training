@@ -40,17 +40,19 @@
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
       <% @articles.each do |article| %>
-        <div class="post-preview">
-          <a href="<%= article_path article %>">
-              <h2 class="post-title">
-                <%= article.title %>
-              </h2>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">User on Rails</a>
-            on September 24, 2021
-          </p>
-        </div>
+        <% unless article.archived? or article.private? %>
+          <div class="post-preview">
+            <a href="<%= article_path article %>">
+                <h2 class="post-title">
+                  <%= article.title %>
+                </h2>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">User on Rails</a>
+              on September 24, 2021
+            </p>
+          </div>
+        <% end %>
       <% end %>
       <hr>
       <h3 class="post-subtitle" style="text-align:center;">
