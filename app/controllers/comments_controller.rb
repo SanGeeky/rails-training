@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# comments_controller.rb
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[destroy]
   http_basic_authenticate_with name: 'user', password: 'secret', only: :destroy

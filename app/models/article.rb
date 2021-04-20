@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# article.rb
 class Article < ApplicationRecord
   include Visible
 
