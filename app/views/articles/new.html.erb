@@ -1,15 +1,9 @@
 <!-- Page Header -->
-<header class="masthead" style="background-image: url(<%= asset_path 'create-bg.jpg' %>);">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="page-heading">
-          <h1>New Article</h1>
-          <span class="subheading">¡Create an Amazing Post!</span>
-        </div>
-      </div>
-    </div>
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>New Article</h1>
+    <span class="subheading">¡Create an Amazing Post!</span>
   </div>
-</header>
+<% end %>
+<!-- Form -->
 <%= render 'form', article: @article %>

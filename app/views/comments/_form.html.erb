@@ -1,11 +1,11 @@
 <h4>New Comment</h4>
-<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+<%= form_with model: [@article, @article.comments.build] do |form| %>
   <div class="control-group">
     <div class="form-group floating-label-form-group controls">
       <%= form.label :commenter %>
       <%= form.text_field :commenter,
                           class: "form-control",
-                          placeholder: "Commenter"%>
+                          placeholder: "Commenter" %>
     </div>
   </div>
   <div class="control-group">
@@ -13,16 +13,16 @@
       <%= form.label :body %>
       <%= form.text_field :body,
                           class: "form-control",
-                          placeholder: "Comment"%>
+                          placeholder: "Comment" %>
       <p class="help-block text-danger"></p>
     </div>
   </div>
   <div class="control-group">
     <%= form.label :status %><br>
-    <%= form.select :status, %w[public private archived], selected: 'public', class: "dropdown"%>
+    <%= form.select :status, %w[public private archived], selected: 'public', class: "dropdown" %>
   </div>
   <br>
   <div class="control-group">
-    <%= form.submit 'Send', :class => "btn btn-outline-dark"%>
+    <%= form.submit 'Send', class: "btn btn-outline-dark" %>
   </div>
 <% end %>

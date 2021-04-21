@@ -1,19 +1,13 @@
-
 <!-- Page Header -->
-<header class="masthead" style="background-image: url(<%= asset_path 'rails-bg.jpg' %>);">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="site-heading">
-          <h1>¡Articles on Rails!</h1>
-          <span class="subheading">Made with Ruby on Rails</span>
-        </div>
-      </div>
-    </div>
+<% content_for :background do %>
+  <%= asset_path 'rails-bg.jpg' %>
+<% end %>
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>¡Articles on Rails!</h1>
+    <span class="subheading">Made with Ruby on Rails</span>
   </div>
-</header>
-
+<% end %>
 <!-- Main Content -->
 <div class="container">
   <div class="row">
@@ -22,25 +16,20 @@
         <% unless article.archived? or article.private? %>
           <div class="post-preview">
             <a href="<%= article_path article %>">
-                <h2 class="post-title">
-                  <%= article.title %>
-                </h2>
+              <h2 class="post-title">
+                <%= article.title %>
+              </h2>
             </a>
-            <p class="post-meta">Posted by
-              <a href="#">User on Rails</a>
-              on September 24, 2021
+            <p class="post-meta">
+              Posted by <a href="#">User on Rails</a> on September 24, 2021
             </p>
           </div>
         <% end %>
       <% end %>
       <hr>
       <h3 class="post-subtitle" style="text-align:center;">
-      Our blog has <%= Article.public_count %> articles and counting!
+        Our blog has <%= Article.public_count %> articles and counting!
       </h3>
     </div>
   </div>
 </div>
-
-
-
-
