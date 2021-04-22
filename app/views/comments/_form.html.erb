@@ -1,7 +1,5 @@
 <!-- Styles-->
-<% content_for :stylesheets do %>
-  <%= stylesheet_link_tag 'forms' %>
-<% end %>
+<%= stylesheet_link_tag 'forms' %>
 <!-- Form Comment -->
 <h4>New Comment</h4>
 <%= form_with model: [@article, @article.comments.build] do |form| %>
