@@ -168,11 +168,10 @@ Bootstrap need the following packages:
 
 1. Bootstrap
 2. jQuery
-3. Popper.js
 
 ### Add packages with Yarn
 ```
-Yarn add bootstrap jquery popper.js
+Yarn add bootstrap jquery
 ```
 
 ### Add new dependencies to Webpack
@@ -186,8 +185,7 @@ environment.plugins.append(
   'Provide',
   new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: 'jquery',
-    Popper: ['popper.js', 'default'],
+    jQuery: 'jquery'
   })
 );
 
