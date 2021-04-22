@@ -1,2 +1,9 @@
-<h1>New Article</h1>
+<!-- Page Header -->
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>New Article</h1>
+    <span class="subheading">¡Create an Amazing Post!</span>
+  </div>
+<% end %>
+<!-- Form -->
 <%= render 'form', article: @article %>

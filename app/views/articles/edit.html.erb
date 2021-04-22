@@ -1,2 +1,8 @@
-<h1>Edit Article</h1>
+<!-- Page Header -->
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>Edit Article</h1>
+    <span class="subheading">¡Let's enhance this post!</span>
+  </div>
+<% end %>
 <%= render 'form', article: @article %>

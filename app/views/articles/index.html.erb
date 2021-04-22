@@ -1,13 +1,33 @@
-<h1>Articles</h1>
-Our blog has <%= Article.public_count %>
-articles and counting!
-<ul>
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
-    <li>
-      <%= link_to article.title, article%>
-    </li>
-    <% end %>
-  <% end %>
-</ul>
-<%= link_to 'New Article', new_article_path %>
+<!-- Page Header -->
+<% content_for :background do %>
+  <%= asset_path 'rails-bg.jpg' %>
+<% end %>
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>¡Articles on Rails!</h1>
+    <span class="subheading">Made with Ruby on Rails</span>
+  </div>
+<% end %>
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <% @articles.each do |article| %>
+        <% unless article.archived? or article.private? %>
+          <div class="post-preview">
+            <a href="<%= article_path article %>">
+              <h2 class="post-title"><%= article.title %></h2>
+            </a>
+            <p class="post-meta">
+              Posted by <a href="#">User on Rails</a> on September 24, 2021
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+      <hr />
+      <h3 class="post-subtitle" style="text-align: center">
+        Our blog has <%= Article.public_count %> articles and counting!
+      </h3>
+    </div>
+  </div>
+</div>

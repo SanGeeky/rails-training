@@ -158,3 +158,74 @@ https://sangeekyonrails.herokuapp.com/
 - [Getting started with Rails](https://devcenter.heroku.com/articles/getting-started-with-ruby)
 - [Postgres Database in Heroku](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres)
 - [Heroku Puma documentation](https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#adding-puma-to-your-application)
+
+
+# Add Bootstrap in Rails 6
+
+Rails 6 includes, webpacker that allows us the use of webpack; webpack is a static module bundler for modern JavaScript applications. [Webpack Concepts](https://webpack.js.org/concepts/)
+
+Bootstrap need the following packages:
+
+1. Bootstrap
+2. jQuery
+
+### Add packages with Yarn
+```
+Yarn add bootstrap jquery
+```
+
+### Add new dependencies to Webpack
+Navigate to `config/webpack/environment.js` and add to webpack settings the next code:
+```javascript
+const { environment } = require('@rails/webpacker');
+
+const webpack = require('webpack');
+
+environment.plugins.append(
+  'Provide',
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
+);
+
+module.exports = environment;
+```
+
+This will add bootstrap as new dependencies for Rails and webpack.
+
+Go to `app/javascript/packs/application.js` to import bootstrap in our views
+
+```javascript
+import 'bootstrap'
+import "@fortawesome/fontawesome-free/js/all"
+import Rails from "@rails/ujs"
+import Turbolinks from "turbolinks"
+import * as ActiveStorage from "@rails/activestorage"
+import "channels"
+
+Rails.start()
+Turbolinks.start()
+ActiveStorage.start()
+```
+
+### Add bootstrap to stylesheet assets
+Finally we need to create a `.scss` and import bootstrap, go to `app/assets/stylesheets/` and create the file `application.scss` and add the next line:
+
+```
+@import 'bootstrap/scss/bootstrap';
+```
+
+### Start using bootstrap in your views
+Now we can start using bootstrap in all our views !
+
+```ruby
+<%= link_to 'Delete',
+            article_path(@article),
+            method: :delete, data: { confirm: 'Are you sure?' },
+            class: "btn btn-outline-danger" %>
+```
+**Source:**
+[How to Install Bootstrap in Rails 6](https://blog.makersacademy.com/how-to-install-bootstrap-and-jquery-on-rails-6-da6e810c1b87)
+
+
