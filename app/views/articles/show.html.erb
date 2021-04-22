@@ -19,21 +19,23 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>
-          <%= @article.body %>
-        </p>
+        <p><%= @article.body %></p>
         <div class="d-grid gap-2 col-12 mx-auto">
           <%= link_to 'Edit',
                       edit_article_path(@article),
-                      class: "btn btn-outline-primary" %>
+                      class: "btn
+                      btn-outline-primary"
+          %>
           <%= link_to 'Delete',
                       article_path(@article),
-                      method: :delete, data: { confirm: 'Are you sure?' },
-                      class: "btn btn-outline-danger" %>
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      class: 'btn btn-outline-danger'
+          %>
         </div>
-        <hr>
+        <hr />
         <h3>Comments</h3>
-        <br>
+        <br />
         <% @article.comments.each do |comment| %>
           <%= render comment %>
         <% end %>
@@ -42,4 +44,4 @@
     </div>
   </div>
 </article>
-<hr>
+<hr />

@@ -16,9 +16,7 @@
         <% unless article.archived? or article.private? %>
           <div class="post-preview">
             <a href="<%= article_path article %>">
-              <h2 class="post-title">
-                <%= article.title %>
-              </h2>
+              <h2 class="post-title"><%= article.title %></h2>
             </a>
             <p class="post-meta">
               Posted by <a href="#">User on Rails</a> on September 24, 2021
@@ -26,8 +24,8 @@
           </div>
         <% end %>
       <% end %>
-      <hr>
-      <h3 class="post-subtitle" style="text-align:center;">
+      <hr />
+      <h3 class="post-subtitle" style="text-align: center">
         Our blog has <%= Article.public_count %> articles and counting!
       </h3>
     </div>
