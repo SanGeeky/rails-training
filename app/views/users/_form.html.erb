@@ -1,0 +1,67 @@
+<!-- Background Image -->
+<% content_for :background do %>
+  <%= asset_path 'rails-bg.jpg' %>
+<% end %>
+<!-- Form New User -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <%= form_with model: user do |form| %>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= form.text_field :email,
+                                class: 'form-control',
+                                placeholder: 'Email'
+            %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= form.text_field :username,
+                                class: 'form-control',
+                                placeholder: 'Username'
+            %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= form.text_field :first_name,
+                                class: 'form-control',
+                                placeholder: 'First Name'
+            %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= form.text_field :last_name,
+                                class: 'form-control',
+                                placeholder: 'Last Name'
+            %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= form.text_field :password,
+                                class: 'form-control',
+                                placeholder: 'Password'
+            %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= form.text_field :password_confirmation,
+                                class: 'form-control',
+                                placeholder: 'Password Confirmation'
+            %>
+          </div>
+        </div>
+        <br />
+        <div class="d-grid gap-2 col-3 mx-auto">
+          <%= form.submit 'Sign Up',
+                          class: 'btn btn-outline-primary'
+          %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

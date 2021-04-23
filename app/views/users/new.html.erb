@@ -1,12 +1,9 @@
-<h1> Sign up</h1>
-<%= form_for @user do |f| %>
-  <%= f.label "Email" %>
-  <%= f.text_field :email %>
-  <%= f.label "Username" %>
-  <%= f.text_field :username %>
-  <%= f.label "Password" %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "Sign Up" %>
+<!-- Header -->
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>Sign Up</h1>
+    <span class="subheading">¡Get on the Rails!</span>
+  </div>
 <% end %>
+<!-- Form -->
+<%= render 'form', user: @user %>

@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create destroy]
   end
   # Users Routes
-  get '/signup' => 'users#new'
-  post '/users' => 'users#create'
+  get '/signup', to:'users#new'
+  post '/users', to:'users#create'
   # Session Routes
-  get '/signin' => 'sessions#new'
-  post '/signin' => 'sessions#create'
-  get '/signout' => 'sessions#destroy'
+  get '/signin', to:'sessions#new'
+  post '/signin', to:'sessions#create'
+  get '/signout', to:'sessions#destroy'
 end
