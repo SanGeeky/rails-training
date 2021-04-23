@@ -171,7 +171,7 @@ Bootstrap need the following packages:
 
 ### Add packages with Yarn
 ```
-Yarn add bootstrap jquery
+Yarn add bootstrap jquery popper.js
 ```
 
 ### Add new dependencies to Webpack
