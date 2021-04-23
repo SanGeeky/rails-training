@@ -6,11 +6,12 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-      <%= form_with model: user do |form| %>
+      <%= form_with url: signup_path do |form| %>
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
             <%= form.text_field :email,
                                 class: 'form-control',
+                                type: 'email',
                                 placeholder: 'Email'
             %>
           </div>
@@ -43,6 +44,7 @@
           <div class="form-group floating-label-form-group controls">
             <%= form.text_field :password,
                                 class: 'form-control',
+                                type: 'password',
                                 placeholder: 'Password'
             %>
           </div>
@@ -51,6 +53,7 @@
           <div class="form-group floating-label-form-group controls">
             <%= form.text_field :password_confirmation,
                                 class: 'form-control',
+                                type: 'password',
                                 placeholder: 'Password Confirmation'
             %>
           </div>

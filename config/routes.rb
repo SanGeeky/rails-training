@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   # Users Routes
   get '/signup', to:'users#new'
-  post '/users', to:'users#create'
+  post '/signup', to:'users#create'
   # Session Routes
   get '/signin', to:'sessions#new'
   post '/signin', to:'sessions#create'

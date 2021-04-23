@@ -1,8 +1,9 @@
-<h1>Sign in</h1>
-<%= form_tag signin_path do %>
-  <%= label_tag :email %>
-  <%= text_field_tag :email %>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-  <%= submit_tag "Sign in" %>
+<!-- Header -->
+<% content_for :header do %>
+  <div class="page-heading">
+    <h1>Sign In</h1>
+    <span class="subheading">¡Back to Rails!</span>
+  </div>
 <% end %>
+<!-- Form -->
+<%= render 'form' %>
