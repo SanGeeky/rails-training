@@ -9,13 +9,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def authorize
-    unless current_user
-      flash[:alert] = "You aren't authorized to visit that page."
-      redirect_to '/'
-    end
-  end
-
   def not_found
     raise ActionController::RoutingError, 'Not Found'
   end

@@ -2,21 +2,24 @@
 
 # sessions_controller.rb
 class SessionsController < ApplicationController
+  before_action :authenticate_user, only: %i[create]
+
   def create
-    @user = User.authenticate(params[:email], params[:password])
-    if @user
-      flash[:notice] = "You've signed in."
-      session[:user_id] = @user.id
-      redirect_to '/'
-    else
-      flash[:alert] = 'There was a problem signing in. Please try again.'
-      redirect_to signin_path
-    end
+    session[:user_id] = @user.id
+    redirect_to root_path
   end
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "You've signed out."
     redirect_to '/'
+  end
+
+  private
+
+  def authenticate_user
+    @user = User.find_by email: params[:email]
+    return redirect_to signin_path if @user.nil?
+
+    @user.authenticate(params[:password]) ? @user : redirect_to(signin_path)
   end
 end
