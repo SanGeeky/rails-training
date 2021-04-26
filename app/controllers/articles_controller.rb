@@ -3,8 +3,7 @@
 # articles_controller.rb
 class ArticlesController < ApplicationController
   before_action :find_article, except: %i[index new create]
-  before_action :authorize, except: :index
-  # http_basic_authenticate_with name: 'user', password: 'secret', except: %i[index show]
+  before_action :authorized, except: :index
 
   def index
     @articles = Article.all
