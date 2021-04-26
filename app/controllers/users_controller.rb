@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    return redirect_to signup_path unless @user.valid?
+    return render :new unless @user.valid?
     @user.save
     session[:user_id] = @user.id
     redirect_to root_path
