@@ -8,7 +8,7 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       <%= form_with model: article do |form| %>
       <%= form.hidden_field :user_id,
-                            value: user_id
+                            value: current_user.id
       %>
       <div class="control-group">
         <div class="form-group floating-label-form-group controls">

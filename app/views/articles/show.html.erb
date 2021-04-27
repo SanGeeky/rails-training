@@ -38,7 +38,7 @@
           <%= render comment %>
         <% end %>
         <% if user_logged_in? %>
-          <%= render 'comments/form', username: current_user.username %>
+          <%= render 'comments/form' %>
         <% else %>
           Share your ideas ! <br />
           <Strong> <%= link_to 'Sign Up', signup_path %> </Strong>
