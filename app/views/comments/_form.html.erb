@@ -1,12 +1,13 @@
 <!-- Form Comment -->
 <h4>New Comment</h4>
+<br>
 <%= form_with model: [@article, @article.comments.build] do |form| %>
   <div class="control-group">
     <div class="form-group floating-label-form-group controls">
-      <%= form.label :commenter %>
       <%= form.text_field :commenter,
-                          class: 'form-control',
-                          placeholder: 'Commenter'
+                          class: 'form-control-plaintext',
+                          value: username,
+                          readonly: true
       %>
     </div>
   </div>
