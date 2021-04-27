@@ -17,8 +17,6 @@ class SessionsController < ApplicationController
   private
 
   def authenticate_user
-    p 'asdasdasdasadq13123123'
-    p params
     @user = User.find_by email: params[:email]
     return redirect_to signin_path if @user.nil?
 

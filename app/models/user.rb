@@ -2,8 +2,6 @@
 
 # user.rb
 class User < ApplicationRecord
-  attr_accessor :password
-
   has_many :articles, dependent: :destroy
 
   has_secure_password
