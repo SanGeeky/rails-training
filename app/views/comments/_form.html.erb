@@ -2,11 +2,14 @@
 <h4>New Comment</h4>
 <br>
 <%= form_with model: [@article, @article.comments.build] do |form| %>
+  <%= form.hidden_field :user_id,
+                        value: current_user.id
+  %>
   <div class="control-group">
     <div class="form-group floating-label-form-group controls">
       <%= form.text_field :commenter,
                           class: 'form-control-plaintext',
-                          value: username,
+                          value: current_user.username,
                           readonly: true
       %>
     </div>
