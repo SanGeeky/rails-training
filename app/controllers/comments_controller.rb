@@ -3,6 +3,7 @@
 # comments_controller.rb
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[destroy]
+  before_action :authorized
 
   def create
     @comment = Comment.new(comment_params)

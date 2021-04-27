@@ -1,14 +1,12 @@
 <!-- Page Header -->
-<% content_for :background do %>
-  <%= asset_path 'post-bg.jpg' %>
-<% end %>
-<% content_for :header do %>
-  <div class="post-heading">
-    <h1><%= @article.title %></h1>
-    <span class="meta">
-      Posted by <a href="#">Rails Blog</a> on August 24, 2021
-    </span>
-  </div>
+<% content_for :background do %> <%= asset_path 'post-bg.jpg' %> <% end %> <%
+content_for :header do %>
+<div class="post-heading">
+  <h1><%= @article.title %></h1>
+  <span class="meta">
+    Posted by <a href="#">Rails Blog</a> on August 24, 2021
+  </span>
+</div>
 <% end %>
 <!-- Post Content -->
 <article>
@@ -19,8 +17,7 @@
         <div class="d-grid gap-2 col-12 mx-auto">
           <%= link_to 'Edit',
                       edit_article_path(@article),
-                      class: "btn
-                      btn-outline-primary"
+                      class: "btn btn-outline-primary"
           %>
           <%= link_to 'Delete',
                       article_path(@article),
@@ -35,7 +32,14 @@
         <% @article.comments.each do |comment| %>
           <%= render comment %>
         <% end %>
-        <%= render 'comments/form' %>
+        <% if user_logged_in? %>
+          <%= render 'comments/form' %>
+        <% else %>
+          Share your ideas ! <br />
+          <Strong> <%= link_to 'Sign Up', signup_path %> </Strong>
+          or
+          <Strong> <%= link_to 'Sign In', signin_path %> </Strong>
+        <% end %>
       </div>
     </div>
   </div>

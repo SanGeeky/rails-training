@@ -3,7 +3,7 @@
 # articles_controller.rb
 class ArticlesController < ApplicationController
   before_action :find_article, except: %i[index new create]
-  before_action :authorized, except: :index
+  before_action :authorized, except: %i[index show]
 
   def index
     @articles = Article.all
