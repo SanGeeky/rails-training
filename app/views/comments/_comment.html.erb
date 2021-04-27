@@ -3,7 +3,7 @@
   <br />
   <p>
     <%= comment.body %>
-    <% if user_logged_in? %>
+    <% if user_logged_in? && comment.user_id == current_user.id %>
       <%= link_to 'Delete',
                   [comment.article, comment],
                   method: :delete,
