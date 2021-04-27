@@ -2,6 +2,8 @@
 
 # users_controller.rb
 class UsersController < ApplicationController
+  before_action :logged_in, only: %i[new]
+
   def new
     @user = User.new
   end
@@ -24,5 +26,9 @@ class UsersController < ApplicationController
                                  :last_name,
                                  :password,
                                  :password_confirmation)
+  end
+
+  def logged_in
+    redirect_to root_path if session[:user_id]
   end
 end

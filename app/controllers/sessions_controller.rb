@@ -6,17 +6,19 @@ class SessionsController < ApplicationController
 
   def create
     session[:user_id] = @user.id
-    redirect_to root_path
+    redirect_to params[:previous_url]
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path
+    redirect_back fallback_location: root_path
   end
 
   private
 
   def authenticate_user
+    p 'asdasdasdasadq13123123'
+    p params
     @user = User.find_by email: params[:email]
     return redirect_to signin_path if @user.nil?
 
