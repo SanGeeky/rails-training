@@ -5,4 +5,5 @@
     <span class="subheading">¡Let's enhance this post!</span>
   </div>
 <% end %>
-<%= render 'form', article: @article %>
+<!-- Form -->
+<%= render 'form', article: @article, user_id: current_user.id %>
