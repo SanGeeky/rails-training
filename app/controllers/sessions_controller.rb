@@ -2,13 +2,18 @@
 
 # sessions_controller.rb
 class SessionsController < ApplicationController
+  before_action :find_user, only: :create
   before_action :logged_in, only: :new
-  before_action :authenticate_user, only: %i[create]
 
   def create
-    session[:user_id] = @user.id
-    flash[:notice] = 'Welcome Back to Articles on Rails'
-    redirect_to params[:previous_url]
+    if @user&.authenticate(params[:password])
+      session[:user_id] = @user.id
+      flash[:notice] = 'Welcome Back to Articles on Rails'
+      redirect_to params[:previous_url]
+    else
+      flash[:error] = 'Incorrect email or password, please try again.'
+      redirect_to signin_path
+    end
   end
 
   def destroy
@@ -19,12 +24,7 @@ class SessionsController < ApplicationController
 
   private
 
-  def authenticate_user
-    @user = User.find_by email: params[:email]
-    flash[:error] = 'Email not found on Rails!'
-    return redirect_to signin_path if @user.nil?
-
-    flash[:error] = "Incorrect password for user: #{@user.username}."
-    @user.authenticate(params[:password]) ? @user : redirect_to(signin_path)
+  def find_user
+    @user = User.find_by(email: params[:email])
   end
 end
