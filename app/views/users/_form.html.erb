@@ -6,6 +6,9 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
+      <% if flash[:alert]%>
+        <h4><%= flash[:alert] %></h4>
+      <% end %>
       <%= form_with url: signup_path, model: user do |form| %>
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
@@ -14,6 +17,11 @@
                                 type: 'email',
                                 placeholder: 'Email'
             %>
+            <% user.errors.full_messages_for(:email).each do |message| %>
+              <div class=" bg-danger text-white">
+                <%= message %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="control-group">
@@ -22,6 +30,11 @@
                                 class: 'form-control',
                                 placeholder: 'Username'
             %>
+            <% user.errors.full_messages_for(:username).each do |message| %>
+              <div class=" bg-danger text-white">
+                <%= message %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="control-group">
@@ -48,6 +61,11 @@
                                 value: '',
                                 placeholder: 'Password'
             %>
+            <% user.errors.full_messages_for(:password).each do |message| %>
+              <div class=" bg-danger text-white">
+                <%= message %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="control-group">
@@ -58,6 +76,11 @@
                                 value: '',
                                 placeholder: 'Password Confirmation'
             %>
+            <% user.errors.full_messages_for(:password_confirmation).each do |message| %>
+              <div class=" bg-danger text-white">
+                <%= message %>
+              </div>
+            <% end %>
           </div>
         </div>
         <br />
