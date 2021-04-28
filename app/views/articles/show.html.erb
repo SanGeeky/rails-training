@@ -3,13 +3,12 @@
   <%= asset_path 'post-bg.jpg' %>
 <% end %>
 <% content_for :header do %>
-<div class="post-heading">
-  <h1><%= @article.title %></h1>
-  <span class="meta">
-    Posted By
-    <%= link_to @article.user.username, user_path(@article.user) %>
-  </span>
-</div>
+  <div class="post-heading">
+    <h1><%= @article.title %></h1>
+    <span class="meta">
+      Posted By <%= link_to @article.user.username, user_path(@article.user) %>
+    </span>
+  </div>
 <% end %>
 <!-- Post Content -->
 <article>
@@ -18,14 +17,11 @@
     <div class="d-grid gap-2 col-12 mx-auto">
       <%= link_to 'Edit',
                   edit_article_path(@article),
-                  class: 'btn btn-outline-primary'
-      %>
+                  class: 'btn btn-outline-primary' %>
       <%= link_to 'Delete',
                   article_path(@article),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' },
-                  class: 'btn btn-outline-danger'
-      %>
+                  method: :delete, data: { confirm: 'Are you sure?' },
+                  class: 'btn btn-outline-danger' %>
     </div>
   <% end %>
   <hr />

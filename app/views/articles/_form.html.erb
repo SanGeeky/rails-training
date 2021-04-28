@@ -3,7 +3,6 @@
   <%= asset_path 'create-bg.jpg' %>
 <% end %>
 <!-- Form Article -->
-
 <%= form_with model: article do |form| %>
   <%= form.hidden_field :user_id,
                         value: current_user.id
