@@ -18,7 +18,7 @@
                                 placeholder: 'Email'
             %>
             <% user.errors.full_messages_for(:email).each do |message| %>
-              <div class=" bg-danger text-white">
+              <div class="bg-danger text-white">
                 <%= message %>
               </div>
             <% end %>
@@ -31,7 +31,7 @@
                                 placeholder: 'Username'
             %>
             <% user.errors.full_messages_for(:username).each do |message| %>
-              <div class=" bg-danger text-white">
+              <div class="bg-danger text-white">
                 <%= message %>
               </div>
             <% end %>
@@ -62,7 +62,7 @@
                                 placeholder: 'Password'
             %>
             <% user.errors.full_messages_for(:password).each do |message| %>
-              <div class=" bg-danger text-white">
+              <div class="bg-danger text-white">
                 <%= message %>
               </div>
             <% end %>
@@ -77,7 +77,7 @@
                                 placeholder: 'Password Confirmation'
             %>
             <% user.errors.full_messages_for(:password_confirmation).each do |message| %>
-              <div class=" bg-danger text-white">
+              <div class="bg-danger text-white">
                 <%= message %>
               </div>
             <% end %>
