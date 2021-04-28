@@ -3,54 +3,49 @@
   <%= asset_path 'create-bg.jpg' %>
 <% end %>
 <!-- Form Article -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      <%= form_with model: article do |form| %>
-      <%= form.hidden_field :user_id,
-                            value: current_user.id
+
+<%= form_with model: article do |form| %>
+  <%= form.hidden_field :user_id,
+                        value: current_user.id
+  %>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <label>Title</label>
+      <%= form.text_field :title,
+                          class: 'form-control',
+                          placeholder: 'Title'
       %>
-      <div class="control-group">
-        <div class="form-group floating-label-form-group controls">
-          <label>Title</label>
-          <%= form.text_field :title,
-                              class: 'form-control',
-                              placeholder: 'Title'
-          %>
-          <% article.errors.full_messages_for(:title).each do |message| %>
-            <div><%= message %></div>
-          <% end %>
-          <p class="help-block text-danger"></p>
-        </div>
-      </div>
-      <div class="control-group">
-        <div class="form-group floating-label-form-group controls">
-          <label>Body</label>
-          <%= form.text_area :body,
-                              class: 'form-control',
-                              placeholder: 'Body',
-                              rows: '8'
-          %>
-          <% article.errors.full_messages_for(:body).each do |message| %>
-            <div><%= message %></div>
-          <% end %>
-          <p class="help-block text-danger"></p>
-        </div>
-      </div>
-      <div class="control-group">
-        <label>Status: </label><br />
-        <%= form.select :status,
-                        %w[public private archived],
-                        selected: article.status
-        %>
-      </div>
-      <br />
-      <div>
-        <%= form.submit 'Send',
-                        class: 'btn btn-outline-primary'
-        %>
-      </div>
+      <% article.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %></div>
       <% end %>
+      <p class="help-block text-danger"></p>
     </div>
   </div>
-</div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <label>Body</label>
+      <%= form.text_area :body,
+                          class: 'form-control',
+                          placeholder: 'Body',
+                          rows: '8'
+      %>
+      <% article.errors.full_messages_for(:body).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+      <p class="help-block text-danger"></p>
+    </div>
+  </div>
+  <div class="control-group">
+    <label>Status: </label><br />
+    <%= form.select :status,
+                    %w[public private archived],
+                    selected: article.status
+    %>
+  </div>
+  <br />
+  <div>
+    <%= form.submit 'Send',
+                    class: 'btn btn-outline-primary'
+    %>
+  </div>
+<% end %>

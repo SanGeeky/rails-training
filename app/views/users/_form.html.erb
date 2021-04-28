@@ -3,93 +3,87 @@
   <%= asset_path 'rails-bg.jpg' %>
 <% end %>
 <!-- Form New User -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      <% if flash[:alert]%>
-        <h4><%= flash[:alert] %></h4>
-      <% end %>
-      <%= form_with url: signup_path, model: user do |form| %>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <%= form.text_field :email,
-                                class: 'form-control',
-                                type: 'email',
-                                placeholder: 'Email'
-            %>
-            <% user.errors.full_messages_for(:email).each do |message| %>
-              <div class="bg-danger text-white">
-                <%= message %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <%= form.text_field :username,
-                                class: 'form-control',
-                                placeholder: 'Username'
-            %>
-            <% user.errors.full_messages_for(:username).each do |message| %>
-              <div class="bg-danger text-white">
-                <%= message %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <%= form.text_field :first_name,
-                                class: 'form-control',
-                                placeholder: 'First Name'
-            %>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <%= form.text_field :last_name,
-                                class: 'form-control',
-                                placeholder: 'Last Name'
-            %>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <%= form.text_field :password,
-                                class: 'form-control',
-                                type: 'password',
-                                value: '',
-                                placeholder: 'Password'
-            %>
-            <% user.errors.full_messages_for(:password).each do |message| %>
-              <div class="bg-danger text-white">
-                <%= message %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <%= form.text_field :password_confirmation,
-                                class: 'form-control',
-                                type: 'password',
-                                value: '',
-                                placeholder: 'Password Confirmation'
-            %>
-            <% user.errors.full_messages_for(:password_confirmation).each do |message| %>
-              <div class="bg-danger text-white">
-                <%= message %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <br />
-        <div class="d-grid gap-2 col-3 mx-auto">
-          <%= form.submit 'Sign Up',
-                          class: 'btn btn-outline-primary'
-          %>
+<% if flash[:alert]%>
+  <h4><%= flash[:alert] %></h4>
+<% end %>
+<%= form_with url: signup_path, model: user do |form| %>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :email,
+                          class: 'form-control',
+                          type: 'email',
+                          placeholder: 'Email'
+      %>
+      <% user.errors.full_messages_for(:email).each do |message| %>
+        <div class="bg-danger text-white">
+          <%= message %>
         </div>
       <% end %>
     </div>
   </div>
-</div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :username,
+                          class: 'form-control',
+                          placeholder: 'Username'
+      %>
+      <% user.errors.full_messages_for(:username).each do |message| %>
+        <div class="bg-danger text-white">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :first_name,
+                          class: 'form-control',
+                          placeholder: 'First Name'
+      %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :last_name,
+                          class: 'form-control',
+                          placeholder: 'Last Name'
+      %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :password,
+                          class: 'form-control',
+                          type: 'password',
+                          value: '',
+                          placeholder: 'Password'
+      %>
+      <% user.errors.full_messages_for(:password).each do |message| %>
+        <div class="bg-danger text-white">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :password_confirmation,
+                          class: 'form-control',
+                          type: 'password',
+                          value: '',
+                          placeholder: 'Password Confirmation'
+      %>
+      <% user.errors.full_messages_for(:password_confirmation).each do |message| %>
+        <div class="bg-danger text-white">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br />
+  <div class="d-grid gap-2 col-3 mx-auto">
+    <%= form.submit 'Sign Up',
+                    class: 'btn btn-outline-primary'
+    %>
+  </div>
+<% end %>

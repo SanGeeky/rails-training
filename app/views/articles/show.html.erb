@@ -13,40 +13,34 @@
 <% end %>
 <!-- Post Content -->
 <article>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <p><%= @article.body %></p>
-        <% if user_logged_in? && current_user.id == @article.user_id %>
-          <div class="d-grid gap-2 col-12 mx-auto">
-            <%= link_to 'Edit',
-                        edit_article_path(@article),
-                        class: 'btn btn-outline-primary'
-            %>
-            <%= link_to 'Delete',
-                        article_path(@article),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' },
-                        class: 'btn btn-outline-danger'
-            %>
-          </div>
-        <% end %>
-        <hr />
-        <h3>Comments</h3>
-        <br />
-        <% @article.comments.each do |comment| %>
-          <%= render comment %>
-        <% end %>
-        <% if user_logged_in? %>
-          <%= render 'comments/form' %>
-        <% else %>
-          Share your ideas ! <br />
-          <Strong> <%= link_to 'Sign Up', signup_path %> </Strong>
-          or
-          <Strong> <%= link_to 'Sign In', signin_path %> </Strong>
-        <% end %>
-      </div>
+  <p><%= @article.body %></p>
+  <% if user_logged_in? && current_user.id == @article.user_id %>
+    <div class="d-grid gap-2 col-12 mx-auto">
+      <%= link_to 'Edit',
+                  edit_article_path(@article),
+                  class: 'btn btn-outline-primary'
+      %>
+      <%= link_to 'Delete',
+                  article_path(@article),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'btn btn-outline-danger'
+      %>
     </div>
-  </div>
+  <% end %>
+  <hr />
+  <h3>Comments</h3>
+  <br />
+  <% @article.comments.each do |comment| %>
+    <%= render comment %>
+  <% end %>
+  <% if user_logged_in? %>
+    <%= render 'comments/form' %>
+  <% else %>
+    Share your ideas ! <br />
+    <Strong> <%= link_to 'Sign Up', signup_path %> </Strong>
+    or
+    <Strong> <%= link_to 'Sign In', signin_path %> </Strong>
+  <% end %>
 </article>
 <hr />

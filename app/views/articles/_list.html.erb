@@ -1,26 +1,18 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      <% if flash[:notice] %>
-        <h4><%= flash[:notice] %></h4>
-      <% end %>
-      <% articles.each do |article| %>
-        <% unless article.archived? or article.private? %>
-          <div class="post-preview">
-            <a href="<%= article_path article %>">
-              <h2 class="post-title"><%= article.title %></h2>
-            </a>
-            <p class="post-meta">
-              Posted by
-              <%= link_to article.user.username, user_path(article.user) %>.
-            </p>
-          </div>
-        <% end %>
-      <% end %>
-      <hr />
-      <h3 class="post-subtitle" style="text-align: center">
-        Our blog has <%= Article.public_count %> articles and counting!
-      </h3>
+<!-- Articles List -->
+<% articles.each do |article| %>
+  <% unless article.archived? or article.private? %>
+    <div class="post-preview">
+      <a href="<%= article_path article %>">
+        <h2 class="post-title"><%= article.title %></h2>
+      </a>
+      <p class="post-meta">
+        Posted by
+        <%= link_to article.user.username, user_path(article.user) %>.
+      </p>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>
+<hr />
+<h3 class="post-subtitle" style="text-align: center">
+  Our blog has <%= Article.public_count %> articles and counting!
+</h3>
