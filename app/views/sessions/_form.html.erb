@@ -6,6 +6,11 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
+      <% if flash[:error]%>
+        <div class=" bg-danger text-white">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
       <%= form_with url: signin_path do |form| %>
         <%= form.hidden_field :previous_url,
                               value: request.referer
