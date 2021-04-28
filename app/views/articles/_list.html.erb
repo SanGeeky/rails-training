@@ -12,7 +12,16 @@
     </div>
   <% end %>
 <% end %>
-<hr />
-<h3 class="post-subtitle" style="text-align: center">
-  Our blog has <%= Article.public_count %> articles and counting!
-</h3>
+<% if user %>
+  <h4>Contact:</h4>
+  <%= user.email %>
+  <hr />
+  <h3 class="post-subtitle" style="text-align: center">
+    <%= user.username %> blog has <%= articles.size %> articles and counting!
+  </h3>
+<% else %>
+  <hr />
+  <h3 class="post-subtitle" style="text-align: center">
+    Our blog has <%= Article.public_count %> articles and counting!
+  </h3>
+<% end %>
