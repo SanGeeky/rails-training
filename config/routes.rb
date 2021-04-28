@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy'
+  # Follow Routes
+  resources :followers, only: %i[create destroy]
 end

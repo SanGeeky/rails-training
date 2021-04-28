@@ -10,4 +10,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
+
+  def follow_user?(user_id)
+    follows.find_by(user_id: user_id)
+  end
 end
