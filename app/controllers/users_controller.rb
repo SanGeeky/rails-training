@@ -11,13 +11,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    flash.now[:alert] = 'There was a problem signing up.'
-    return render :new unless @user.valid?
-
-    @user.save
-    session[:user_id] = @user.id
-    flash[:notice] = 'Now you are on Rails Blog!'
-    redirect_to root_path
+    if @user.save
+      session[:user_id] = @user.id
+      flash[:notice] = 'Now you are on Rails Blog!'
+      redirect_to root_path
+    else
+      flash.now[:alert] = 'There was a problem signing up.'
+      render :new unless @user.valid?
+    end
   end
 
   private
