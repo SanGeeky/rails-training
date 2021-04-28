@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
+    flash[:errors] = @comment.errors.full_messages
     redirect_article
   end
 
