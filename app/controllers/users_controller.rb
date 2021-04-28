@@ -38,8 +38,4 @@ class UsersController < ApplicationController
                                  :password,
                                  :password_confirmation)
   end
-
-  def logged_in
-    redirect_to root_path if session[:user_id]
-  end
 end
