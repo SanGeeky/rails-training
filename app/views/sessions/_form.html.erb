@@ -1,0 +1,38 @@
+<!-- Background Image -->
+<% content_for :background do %>
+  <%= asset_path 'rails-bg.jpg' %>
+<% end %>
+<!-- Form New User -->
+<% if flash[:error]%>
+  <div class="bg-danger text-white">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+<%= form_with url: signin_path do |form| %>
+  <%= form.hidden_field :previous_url,
+                        value: request.referer
+  %>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :email,
+                          class: 'form-control',
+                          placeholder: 'Email'
+      %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <%= form.text_field :password,
+                          class: 'form-control',
+                          type: 'password',
+                          placeholder: 'Password'
+      %>
+    </div>
+  </div>
+  <br />
+  <div class="d-grid gap-2 col-3 mx-auto">
+    <%= form.submit 'Sign In',
+                    class: 'btn btn-outline-primary'
+    %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<!-- Page Header -->
+<% content_for :background do %>
+  <%= asset_path 'user-bg.jpg' %>
+<% end %>
+<!-- Page Header -->
+<% content_for :header do %>
+  <div class="post-heading">
+    <h1><%= @user.username %> Profile</h1>
+    <span class="meta">
+      <%= @user.first_name %> <%= @user.last_name %>
+    </span>
+  </div>
+<% end %>
+<!-- Articles -->
+<%= render 'articles/list', user: @user, articles: @user.articles %>

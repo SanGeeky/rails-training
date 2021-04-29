@@ -3,7 +3,7 @@
 # articles_controller.rb
 class ArticlesController < ApplicationController
   before_action :find_article, except: %i[index new create]
-  http_basic_authenticate_with name: 'user', password: 'secret', except: %i[index show]
+  before_action :authorized, except: %i[index show]
 
   def index
     @articles = Article.all
@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :status)
+    params.require(:article).permit(:title, :body, :status, :user_id)
   end
 
   def find_article

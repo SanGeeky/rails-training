@@ -1,0 +1,27 @@
+<!-- Articles List -->
+<% articles.each do |article| %>
+  <% unless article.archived? or article.private? %>
+    <div class="post-preview">
+      <a href="<%= article_path article %>">
+        <h2 class="post-title"><%= article.title %></h2>
+      </a>
+      <p class="post-meta">
+        Posted by <%= link_to article.user.username, user_path(article.user) %>.
+      </p>
+    </div>
+  <% end %>
+<% end %>
+<!-- Articles Counter-->
+<% if user %>
+  <h4>Contact:</h4>
+  <%= user.email %>
+  <hr/>
+  <h3 class="post-subtitle" style="text-align: center">
+    <%= user.username %> blog has <%= articles.size %> articles and counting!
+  </h3>
+  <% else %>
+  <hr/>
+  <h3 class="post-subtitle" style="text-align: center">
+    Our blog has <%= Article.public_count %> articles and counting!
+  </h3>
+<% end %>

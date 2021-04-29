@@ -1,12 +1,23 @@
 <!-- Form Comment -->
 <h4>New Comment</h4>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |message| %>
+    <div class="bg-danger text-white">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+<br />
 <%= form_with model: [@article, @article.comments.build] do |form| %>
+  <%= form.hidden_field :user_id,
+                        value: current_user.id
+  %>
   <div class="control-group">
     <div class="form-group floating-label-form-group controls">
-      <%= form.label :commenter %>
       <%= form.text_field :commenter,
-                          class: 'form-control',
-                          placeholder: 'Commenter'
+                          class: 'form-control-plaintext',
+                          value: current_user.username,
+                          readonly: true
       %>
     </div>
   </div>

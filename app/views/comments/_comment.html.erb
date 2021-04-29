@@ -3,11 +3,13 @@
   <br />
   <p>
     <%= comment.body %>
-    <%= link_to 'Delete',
-                [comment.article, comment],
-                method: :delete,
-                data: { confirm: 'Are you sure?' },
-                class: 'link-danger'
-    %>
+    <% if user_logged_in? && comment.user_id == current_user.id %>
+      <%= link_to 'Delete',
+                  [comment.article, comment],
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'link-danger float-right'
+      %>
+    <% end %>
   </p>
 <% end %>

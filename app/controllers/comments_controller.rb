@@ -3,11 +3,12 @@
 # comments_controller.rb
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[destroy]
-  http_basic_authenticate_with name: 'user', password: 'secret', only: :destroy
+  before_action :authorized
 
   def create
     @comment = Comment.new(comment_params)
     @comment.save
+    flash[:errors] = @comment.errors.full_messages
     redirect_article
   end
 
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    comment = params.require(:comment).permit(:commenter, :body, :status)
+    comment = params.require(:comment).permit(:commenter, :body, :status, :user_id)
     comment.merge(article_id: params[:article_id])
   end
 
