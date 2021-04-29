@@ -9,15 +9,15 @@
 <% end %>
 <!-- Users Following -->
 <div class="col-md-8 mx-auto">
-  <% if @follows.size > 0 %>
-    <% @follows.each do |user_followed| %>
+  <% if @user_follows.size > 0 %>
+    <% @user_follows.each do |user_followed| %>
       <li class="d-flex justify-content-between align-items-center">
         <h2><%= link_to user_followed.username, user_path(user_followed) %></h2>
         <%= link_to 'Unfollow',
-                      follower_path(user_followed),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      class: 'btn btn-primary p-2' %>
+                    follower_path(user_followed),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-primary p-2' %>
       </li>
     <% end %>
   <% else %>

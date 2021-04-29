@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def follows
-    @follows = @user.follows.map(&:user)
+    @user_follows = @user.follow_to.map(&:user)
   end
 
   private
@@ -45,6 +45,6 @@ class UsersController < ApplicationController
   end
 
   def valid_user
-    redirect_to root_path if @user.id != session[:user_id]
+    redirect_to root_path unless @user.id == session[:user_id]
   end
 end

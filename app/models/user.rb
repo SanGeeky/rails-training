@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :followers, dependent: :destroy
-  has_many :follows,
+  has_many :follow_to,
            class_name: :Follower,
            foreign_key: :follower_id,
            dependent: :destroy
@@ -17,6 +17,6 @@ class User < ApplicationRecord
   def follow_user?(user_id)
     return true if id == user_id
 
-    follows.find_by(user_id: user_id)
+    follow_to.find_by(user_id: user_id)
   end
 end

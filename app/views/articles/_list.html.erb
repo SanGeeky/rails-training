@@ -17,7 +17,7 @@
   <%= user.email %>
   <% if user == current_user %>
     <hr />
-    <% if user.followers.size > 0 %>
+    <% if user_followers.size > 0 %>
       <h4>Followers:</h4>
       <% user_followers.each do |follower| %>
         <ul><%= link_to follower.username, user_path(follower) %></ul>
