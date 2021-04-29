@@ -1,5 +1,5 @@
 <% unless comment.archived? || comment.private? %>
-  <strong><%= comment.commenter %>:</strong>
+  <strong><%= link_to comment.commenter, user_path(comment.user) %>:</strong>
   <br />
   <p>
     <%= comment.body %>

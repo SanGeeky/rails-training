@@ -15,12 +15,27 @@
 <% if user %>
   <h4>Contact:</h4>
   <%= user.email %>
-  <hr/>
+  <% if user == current_user %>
+    <hr />
+    <% if user_followers.size > 0 %>
+      <h4>Followers:</h4>
+      <% user_followers.each do |follower| %>
+        <ul><%= link_to follower.username, user_path(follower) %></ul>
+      <% end %>
+      <% else %>
+      <h3>Amazing followers will come to share knowledge!</h3>
+    <% end %>
+    <hr>
+    <%= link_to 'Followed Users',
+                user_follows_path(current_user),
+                class: 'btn btn-outline-primary' %>
+  <% end %>
+  <hr />
   <h3 class="post-subtitle" style="text-align: center">
     <%= user.username %> blog has <%= articles.size %> articles and counting!
   </h3>
   <% else %>
-  <hr/>
+  <hr />
   <h3 class="post-subtitle" style="text-align: center">
     Our blog has <%= Article.public_count %> articles and counting!
   </h3>
