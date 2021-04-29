@@ -10,20 +10,18 @@
       <%= @user.first_name %> <%= @user.last_name %>
     </span>
     <br>
-    <% if current_user %>
-      <% if current_user.id != @user.id %>
-        <% unless current_user.follow_user?(@user.id) %>
-          <%= link_to 'Follow',
-                      followers_path(user_id: @user.id),
-                      method: :post,
-                      class: 'btn btn-primary' %>
-        <% else %>
-          <%= link_to 'Unfollow',
-                      follower_path(user_id: @user.id),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      class: 'btn btn-primary' %>
-        <% end %>
+    <% if current_user && current_user.id != @user.id %>
+      <% unless current_user.follow_user?(@user.id) %>
+        <%= link_to 'Follow',
+                    followers_path(user_id: @user.id),
+                    method: :post,
+                    class: 'btn btn-primary' %>
+      <% else %>
+        <%= link_to 'Unfollow',
+                    follower_path(user_id: @user.id),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-primary' %>
       <% end %>
     <% else %>
       <span class="meta">

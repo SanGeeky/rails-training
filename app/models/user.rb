@@ -15,8 +15,6 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   def follow_user?(user_id)
-    return true if id == user_id
-
     follow_to.find_by(user_id: user_id)
   end
 end

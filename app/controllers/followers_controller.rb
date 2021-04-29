@@ -5,8 +5,8 @@ class FollowersController < ApplicationController
   before_action :authorized
 
   def create
-    follow = Follower.create(follow_params)
-    follow.save
+    follow = Follower.new(follow_params)
+    follow.save if follow.valid?
     redirect_article
   end
 

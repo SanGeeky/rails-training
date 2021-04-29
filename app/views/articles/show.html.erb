@@ -31,7 +31,7 @@
     <%= render comment %>
   <% end %>
   <% if user_logged_in? %>
-    <% if current_user.follow_user?(@article.user_id) %>
+    <% if current_user == @article.user || current_user.follow_user?(@article.user_id) %>
       <%= render 'comments/form' %>
     <% else %>
       <h3>
