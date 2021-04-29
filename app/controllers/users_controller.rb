@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :logged_in, only: :new
   before_action :authorized, only: :follows
   before_action :find_user, only: %i[show follows]
+  before_action :valid_user, only: :follows
 
   def new
     @user = User.new
@@ -41,5 +42,9 @@ class UsersController < ApplicationController
                                  :last_name,
                                  :password,
                                  :password_confirmation)
+  end
+
+  def valid_user
+    redirect_to root_path if @user.id != session[:user_id]
   end
 end

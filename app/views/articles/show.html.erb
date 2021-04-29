@@ -31,7 +31,13 @@
     <%= render comment %>
   <% end %>
   <% if user_logged_in? %>
-    <%= render 'comments/form' %>
+    <% if current_user.follow_user?(@article.user_id) %>
+      <%= render 'comments/form' %>
+    <% else %>
+      <h3>
+        Follow the user <%= link_to @article.user.username, user_path(@article.user) %> to share your ideas !
+      </h3>
+    <% end %>
   <% else %>
     Share your ideas ! <br />
     <Strong> <%= link_to 'Sign Up', signup_path %> </Strong>
