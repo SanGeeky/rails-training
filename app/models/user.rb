@@ -5,7 +5,10 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :followers, dependent: :destroy
-  has_many :follows, foreign_key: :follower_id, class_name: 'Follower', dependent: :destroy
+  has_many :follows,
+           class_name: :Follower,
+           foreign_key: :follower_id,
+           dependent: :destroy
 
   has_secure_password
   validates :email, presence: true, uniqueness: true

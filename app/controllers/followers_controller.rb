@@ -12,9 +12,12 @@ class FollowersController < ApplicationController
 
   def destroy
     follow = Follower.find_by(follow_params)
-    return not_found if follow.nil?
-    follow.destroy
-    redirect_article
+    if follow
+      follow.destroy
+      redirect_article
+    else
+      not_found
+    end
   end
 
   private

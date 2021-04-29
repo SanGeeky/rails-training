@@ -3,7 +3,8 @@
 # users_controller.rb
 class UsersController < ApplicationController
   before_action :logged_in, only: :new
-  before_action :find_user, only: :show
+  before_action :authorized, only: :follows
+  before_action :find_user, only: %i[show follows]
 
   def new
     @user = User.new
@@ -19,6 +20,10 @@ class UsersController < ApplicationController
       flash.now[:alert] = 'There was a problem signing up.'
       render :new unless @user.valid?
     end
+  end
+
+  def follows
+    @follows = @user.follows.map(&:user)
   end
 
   private
