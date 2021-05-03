@@ -11,5 +11,29 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ApplicationHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { create :user }
+
+  context "user unauthenticated" do
+    it 'not current user' do
+      expect(current_user).to be_nil
+    end
+    it 'user not logged in' do
+      expect(user_logged_in?).to be_nil
+    end
+  end
+
+  context "user logged in" do
+    before(:example) do
+      # Create Session
+      session[:user_id] = user.id
+    end
+
+    it 'current ser' do
+      expect(current_user).to eq(user)
+    end
+    it 'user logged in' do
+      expect(user_logged_in?).to eq(user)
+    end
+  end
+
 end
