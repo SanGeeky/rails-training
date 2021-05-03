@@ -2,66 +2,67 @@
 
 require 'rails_helper'
 
-RSpec.describe ArticlesController, type: :controller do
+RSpec.describe ArticlesController, type: :request do
   context 'articles user not authenticated' do
     describe '#index' do
-      before { get :index }
+      subject { get articles_path }
 
-      it { should respond_with 200 }
-      it { should render_template 'index' }
+      it { is_expected.to equal 200 }
+      it { is_expected.to render_template 'index' }
     end
 
     describe '#show' do
-      subject { create :article }
+      before { create :article }
+      subject { get article_path id: Article.last.id }
 
-      it 'article found' do
-        get :show, params: { id: subject.id }
-        expect(response.status).to eq(200)
-      end
-
-      it 'article not found' do
+      it { is_expected.to equal 200 }
+      it { is_expected.to render_template 'show' }
+      it 'is expected to not found' do
         random_id = rand(1..100)
-        expect { get get :show, params: { id: random_id } }.to raise_error ActionController::RoutingError
+        expect { get article_path id: random_id }.to raise_error ActionController::RoutingError
       end
     end
 
     describe '#new' do
-      before { get :new }
+      subject { get new_article_path }
 
-      it { should respond_with(:redirect) }
-      it { should redirect_to signin_path }
+      it { is_expected.to equal 302 }
+      it { is_expected.to redirect_to signin_path }
     end
 
     describe '#create' do
-      before { post :create }
+      let(:article) { build :article }
+      subject { post articles_path(article: article.instance_values) }
 
-      it { should respond_with(:redirect) }
-      it { should redirect_to signin_path }
+      it { is_expected.to equal 302 }
+      it { is_expected.to redirect_to signin_path }
     end
 
     describe '#update' do
       let(:article) { create :article }
+      let(:article_updated) { build :article }
+      subject do
+        put article_path(article),
+            params: { article: article_updated.instance_values }
+      end
 
-      before { get :create, params: { id: article.id } }
-      it { should respond_with(:redirect) }
-      it { should redirect_to signin_path }
+      it { is_expected.to equal 302 }
+      it { is_expected.to redirect_to signin_path }
     end
 
     describe '#destroy' do
       let(:article) { create :article }
+      subject { delete article_path(article) }
 
-      before { get :destroy, params: { id: article.id } }
-      it { should respond_with(:redirect) }
-      it { should redirect_to signin_path }
+      it { is_expected.to equal 302 }
+      it { is_expected.to redirect_to signin_path }
     end
   end
-end
 
-RSpec.describe ArticlesController, type: :request do
   context 'articles user authenticated' do
     let(:user) { create :user }
-    subject { create :article, user: user }
-
+    let(:article) { create :article, user: user }
+    # subject {  }
     before(:example) do
       # Create Session
       post signin_path, params: {
@@ -72,62 +73,62 @@ RSpec.describe ArticlesController, type: :request do
     end
 
     describe '#index' do
-      before { get articles_path }
+      subject { get articles_path }
 
-      it { expect(response.status).to eq 200 }
-      it { should render_template 'index' }
+      it { is_expected.to equal 200 }
+      it { is_expected.to render_template 'index' }
     end
 
     describe '#show' do
-      it 'article found' do
-        get article_path id: subject.id
-        expect(response.status).to eq(200)
-      end
+      subject { get article_path id: article.id }
 
-      it 'article not found' do
+      it { is_expected.to equal 200 }
+      it { is_expected.to render_template 'show' }
+      it 'is expected to not found' do
         random_id = rand(1..100)
         expect { get article_path id: random_id }.to raise_error ActionController::RoutingError
       end
     end
 
     describe '#new' do
-      before { get new_article_path }
+      subject { get new_article_path }
 
-      it { expect(response.status).to eq 200 }
-      it { should render_template 'new' }
+      it { is_expected.to equal 200 }
+      it { is_expected.to render_template 'new' }
     end
 
     describe '#create' do
-      it 'saved' do
-        post articles_path(article: subject.instance_values)
-        expect(response.status).to eq 200
-      end
+      let(:new_article) { build :article }
+      subject { post articles_path(article: new_article.instance_values) }
 
-      it 'not saved' do
-        post articles_path(article: { title: nil, body: nil })
-        expect(subject).to render_template 'new'
+      it { is_expected.to equal 200}
+      it 'article not saved' do
+        subject { post articles_path(article: { title: nil, body: nil }) }
+        is_expected.to render_template 'new'
       end
     end
 
     describe '#update' do
-      let(:article) { build :article }
-
-      it 'updated' do
-        put article_path(subject), params: { article: article.instance_values }
-        expect(response.status).to eq 302
+      let(:article_updated) { build :article }
+      subject do
+        put article_path(article),
+            params: { article: article_updated.instance_values }
       end
 
-      it 'not updated' do
-        put article_path(subject), params: { article: { title: nil, body: nil } }
-        expect(subject).to render_template 'edit'
+      it { is_expected.to equal 302 }
+      it { is_expected.to redirect_to article_path(article) }
+      it 'article not updated' do
+        put article_path(article),
+            params: { article: { title: nil, body: nil } }
+        expect(response).to render_template 'edit'
       end
     end
 
     describe '#destroy' do
-      before { delete article_path(subject) }
+      subject { delete article_path(article) }
 
-      it { expect(response.status).to eq 302 }
-      it { should redirect_to root_path }
+      it { is_expected.to eq 302 }
+      it { is_expected.to redirect_to root_path }
     end
   end
 end

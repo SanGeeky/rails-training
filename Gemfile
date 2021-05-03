@@ -28,8 +28,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-# Features an easy-to-use API
-gem 'rexml', '~> 3.2.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -57,6 +55,8 @@ group :test do
   gem 'rspec-rails'
   # Test templates
   gem 'rails-controller-testing'
+  # Features an easy-to-use API
+  gem 'rexml', '~> 3.2.4'
   # Test fixtures replacement
   gem 'factory_bot_rails'
   # Create Fake Data
